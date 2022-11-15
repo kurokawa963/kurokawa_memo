@@ -1,0 +1,129 @@
+body {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    font-size: 32px;
+    width: 100%;
+}
+
+header {
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+
+main {
+    border-bottom: 1px solid #ccc;
+
+}
+
+.md {
+    display: flex;
+    font-size: 10px;
+    height: 40px;
+    margin: 0 4.5% 0;
+}
+
+.tsuki,
+.hi,
+.btn,#tsukihi {
+    margin: 10px;
+}
+
+.btn {
+    cursor: pointer;
+    display: table-cell;
+}
+
+p {
+    font-size: 200%;
+    text-align: center;
+    border-bottom: 1px solid #fff;
+    height: 200px;
+}
+
+.menu {
+    display: flex;
+    list-style: none;
+    width: 100%;
+    padding: 0;
+
+}
+
+.mae {
+
+    width: 50%;
+
+
+}
+
+.ato {
+
+    width: 50%;
+
+
+}
+
+#input,
+#text_area {
+    margin: 0 4.5% 0;
+}
+
+#input2,
+#text_area2 {
+    margin: 0 4.5% 0;
+}
+
+
+.saveclear {
+    padding: 0;
+    border-top: 1px solid #000000;
+    display: table;
+    /* 定義 */
+    table-layout: fixed;
+    width: 100%;
+}
+
+#save {
+    list-style-type: none;
+    border: 1px solid #666;
+    background-color: #FFF;
+    display: table-cell;
+    /* 定義 */
+    cursor: pointer;
+}
+
+#clear {
+    list-style-type: none;
+    border: 1px solid #666;
+    background-color: #FFF;
+    display: table-cell;
+    /* 定義 */
+    cursor: pointer;
+}
+
+#save:hover {
+    background: #0066CC;
+    color: #fff;
+}
+
+#clear:hover {
+    background: #0066CC;
+    color: #fff;
+}
+
+input,
+textarea {
+
+    width: 90%;
+    font-size: 70%;
+
+}
+
+input {
+    height: 30px;
+}
+
+textarea {
+    height: 230px;
+}

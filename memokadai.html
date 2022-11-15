@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="memokadai.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <h1>今日のごはん</h1>
+    </header>
+    <main>
+
+        <ul class="menu">
+            <li class="mae">
+                <div class="md">
+                    <select name="" id="select1"></select>
+                    <p class="tsuki">月</p>
+                    <select name="" id="select2"></select>
+                    <p class="hi">日</p>
+                    <p id="tsukihi"></p>
+                    <p class="btn" id="btn">ごはん</p>
+                </div>
+                <input type="text" id="input">
+                <textarea id="text_area"></textarea>
+            </li>
+            <li class="ato">
+                <input type="text" id="input2">
+                <textarea name="text_area2" id="text_area2"></textarea>
+            </li>
+        </ul>
+        <ul class="saveclear">
+            <li id="save">Save</li>
+            <li id="clear">Clear</li>
+        </ul>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        // 月
+        const start = 1;
+        const end = 12;
+
+        let month = "";
+
+        for (let i = start; i <= end; i++) {
+            month += '<option>' + i + '</option>'
+        }
+        console.log(month);
+        $('#select1').html(month);
+
+        // 日
+        //  $('#select1').change(function () {
+        let selectd_month = $('#select1').val();
+        const start2 = 1;
+        const ends = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        end2 = ends[selectd_month];
+        let date = 0;
+
+        for (let i = start2; i <= end2; i++) {
+            date += '<option>' + i + '</option>'
+        }
+        console.log(date);
+        $('#select2').html(date);
+
+        $('#select2').change(function () {
+            let month_date = $('#select1').val() + $('#select2').val()
+
+           $("#tsukihi").text(month_date)
+        });
+        //  });
+
+
+        // 保存
+
+        $('#save').on('click', function () {
+
+            const month1 = $('#select1').val();
+            const day1 = $('#select2').val();
+            const title1 = $('#input').val();
+            const text1 = $('#text_area').val();
+            const data = {
+                month: month1,
+                date: day1,
+                title: title1,
+                text: text1,
+            };
+
+            let j = $('#select1').val() + $('#select2').val();
+            console.log(j)
+            const jsonData = JSON.stringify(data);
+            localStorage.setItem(j, jsonData);
+            console.log(jsonData);
+            console.log(data);
+        });
+
+    
+
+        $('#btn').on('click', function () {
+
+            if('#tsukihi'==='j')
+                if (localStorage.getItem('j(#tsukihi)')) {
+
+                    const jsonData = localStorage.getItem('j(#tsukihi)');
+                    console.log(jsonData)
+                    const data = JSON.parse(jsonData);
+                    console.log(data);
+
+                    $('#input').val(data.title);
+                    $('#text_area').val(data.text);
+                }
+            
+            else {
+                $('#input').val("");
+                $('#text_area').val("");
+
+            }
+        }
+        );
+
+        // 削除
+        $("#clear").on("click", function () {
+            localStorage.removeItem('j');
+            $('#select1').val("");
+            $('#select2').val("");
+            $('#input').val("");
+            $('#text_area').val("");
+
+        });
+        // 取得
+        // if (localStorage.getItem('j')) {
+        //     const jsonData = localStorage.getItem("j");
+        //     console.log(jsonData)
+        //     const data = JSON.parse(jsonData);
+        //     console.log(data);
+
+        //     $('#select1').val(data.month);
+        //     $('#select2').val(data.date);
+        //     $('#input').val(data.title);
+        //     $('#text_area').val(data.text);
+
+        // }
+
+
+    </script>
+</body>
+
+</html>
