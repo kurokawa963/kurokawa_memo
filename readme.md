@@ -2,7 +2,7 @@
 
 ## DEMO
 
-  - デプロイしている場合はURLを記入（任意）
+  - https://kurokawa963.github.io/kurokawa_memo/memokadai.html
 
 ## 紹介と使い方
 
@@ -26,6 +26,7 @@
 ## 参考にした web サイトなど
 
   - https://codelikes.com/javascript-localstorage/
+  
   -ローカルストレージの内容を羅列する方法
   - https://dev.classmethod.jp/references/webstrorage_favorite-condition/
  - ローカルストレージをブラウザ上で呼び起こす方法？解読できませんでした
