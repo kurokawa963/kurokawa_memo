@@ -11,7 +11,7 @@
 
 <body>
     <header>
-        <h1>今日のごはん</h1>
+        <h1>あの日のごはんなんやっけ？</h1>
     </header>
     <main>
 
@@ -22,17 +22,26 @@
                     <p class="tsuki">月</p>
                     <select name="" id="select2"></select>
                     <p class="hi">日</p>
-                    <p id="tsukihi"></p>
+
+                    <!-- <select id="tsukihi"></select> -->
                     <p class="btn" id="btn">ごはん</p>
                 </div>
                 <input type="text" id="input">
                 <textarea id="text_area"></textarea>
             </li>
             <li class="ato">
+                <div class="md">
+                    <select name="" id="select3"></select>
+                    <p class="tsuki">月</p>
+                    <select name="" id="select4"></select>
+                    <p class="hi">日</p>
+                    <p class="nani">何食べたっけ</p>
+                </div>
                 <input type="text" id="input2">
                 <textarea name="text_area2" id="text_area2"></textarea>
             </li>
         </ul>
+        <h3 id="gohan"></h3>
         <ul class="saveclear">
             <li id="save">Save</li>
             <li id="clear">Clear</li>
@@ -51,6 +60,7 @@
         }
         console.log(month);
         $('#select1').html(month);
+        $('#select3').html(month);
 
         // 日
         //  $('#select1').change(function () {
@@ -65,23 +75,36 @@
         }
         console.log(date);
         $('#select2').html(date);
+        $('#select4').html(date);
 
-        $('#select2').change(function () {
-            let month_date = $('#select1').val() + $('#select2').val()
+        // $('#select2').change(function () {
+        //     let month_date = $('#select1').val() + "/"+ $('#select2').val()
 
-           $("#tsukihi").text(month_date)
-        });
+        //     $("#tsukihi").html(month_date)
+        // });
         //  });
 
 
         // 保存
+        // const k = [];
+        // $('#select2').change(function () {
+        //     const j = $('#select1').val() + "/" + $('#select2').val();
+        //     k.push('<option>' + j + '</option>');
+        //     console.log(k)
+        //     $('#tsukihi').html(k);
+
+
+        // });
 
         $('#save').on('click', function () {
+            const j = $('#select1').val() + "/" + $('#select2').val();
+
 
             const month1 = $('#select1').val();
             const day1 = $('#select2').val();
             const title1 = $('#input').val();
             const text1 = $('#text_area').val();
+
             const data = {
                 month: month1,
                 date: day1,
@@ -89,41 +112,83 @@
                 text: text1,
             };
 
-            let j = $('#select1').val() + $('#select2').val();
-            console.log(j)
+
+
             const jsonData = JSON.stringify(data);
-            localStorage.setItem(j, jsonData);
+            localStorage.setItem($('#select1').val() + "/" + $('#select2').val(), jsonData);
             console.log(jsonData);
             console.log(data);
+
         });
 
-    
+
+        // 日付指定して「ごはん」ボタンクリックでその日のごはんを取得
 
         $('#btn').on('click', function () {
 
-            if('#tsukihi'==='j')
-                if (localStorage.getItem('j(#tsukihi)')) {
+            // for (let i = 0; i < localStorage.length; i++) {
 
-                    const jsonData = localStorage.getItem('j(#tsukihi)');
-                    console.log(jsonData)
-                    const data = JSON.parse(jsonData);
-                    console.log(data);
+            // }
+            if (localStorage.getItem($('#select1').val() + "/" + $('#select2').val())) {
+                // if ($('#tsukihi').val() === $('#select1').val() + "/" + $('#select2').val()) {
+                // localStorage.getItem($('#select1').val() + "/" + $('#select2').val()) {
 
-                    $('#input').val(data.title);
-                    $('#text_area').val(data.text);
-                }
-            
+                const jsonData = localStorage.getItem($('#select1').val() + "/" + $('#select2').val());
+                console.log(jsonData)
+                const data = JSON.parse(jsonData);
+                console.log(data);
+
+                $('#select1').val(data.month);
+                $('#select2').val(data.date);
+                $('#input').val(data.title);
+                $('#text_area').val(data.text);
+
+
+            }
+// 何も入力されてない日付だったら空白
             else {
+
                 $('#input').val("");
                 $('#text_area').val("");
 
             }
         }
+
         );
+
+        $('#btn').on('click', function () {
+            const month2 = $('#select3').val();
+            const day2 = $('#select4').val();
+            const title2 = $('#input2').val();
+            const text2 = $('#text_area2').val();
+
+            const data2 = {
+                month: month2,
+                date: day2,
+                title: title2,
+                text: text2,
+            };
+            console.log(data2);
+            // あってたら表示
+            if ($('#select1').val() === $('#select3').val() && $('#select2').val() === $('#select4').val() && $('#text_area').val() === $('#text_area2').val() && $('#input').val() === $('#input2').val()) {
+                $('#gohan').text('せいかい！')
+
+
+            }
+            // 右のフォームに何も書いてなかったら作動しない
+            else if ($('#text_area2').val() === "" && $('#input2').val() === "") {
+                $('#gohan').text('')
+
+            }
+            // まちがってたら表示
+            else {
+                $('#gohan').text('ちがいま～す')
+            }
+        });
 
         // 削除
         $("#clear").on("click", function () {
-            localStorage.removeItem('j');
+            localStorage.removeItem($('#select1').val() + "/" + $('#select2').val());
             $('#select1').val("");
             $('#select2').val("");
             $('#input').val("");
@@ -143,6 +208,13 @@
         //     $('#text_area').val(data.text);
 
         // }
+
+
+
+
+
+
+
 
 
     </script>
