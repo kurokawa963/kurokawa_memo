@@ -4,6 +4,7 @@ body {
     text-align: left;
     font-size: 32px;
     width: 100%;
+
 }
 
 header {
@@ -19,6 +20,7 @@ main {
 
 .md {
     display: flex;
+
     font-size: 10px;
     height: 40px;
     margin: 0 4.5% 0;
@@ -34,7 +36,10 @@ main {
 
 .btn {
     cursor: pointer;
-    display: table-cell;
+    margin: 0.5%;
+    padding: 0.5%;
+    border: 1px solid #666;
+    border-radius: 10%;
 }
 
 p {

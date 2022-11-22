@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="memokadaitop.css">
+    <title></title>
+</head>
+
+<body>
+    <header>
+        <h1>レシピ</h1>
+    </header>
+    <main>
+        <select name="" id="mainmenu"></select>
+        <p id="OK">OK</p>
+        <input type="menu" id="menu">
+
+
+        <textarea name="" id="recipe"></textarea>
+        <ul class="saveclear">
+            <li id="save1">Save</li>
+            <li id="clear">Clear</li>
+        </ul>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+
+        let mainmenu = [""];
+ 
+        $('#menu').change(function () {
+            const menu1 = $('#menu').val()
+            mainmenu.unshift('<option>' + menu1 + '</option>');
+            $('#mainmenu').html(mainmenu);
+        });
+
+
+        $('#save1').on('click', function () {
+
+            const menu1 = $('#menu').val()
+            const recipe1 = $('#recipe').val()
+            const mainmenu1 = $('#mainmenu').val()
+
+            const data2 = {
+                mainmenu: mainmenu1,
+                menu: menu1,
+                recipe: recipe1,
+
+            }
+            const jsonData2 = JSON.stringify(data2);
+            localStorage.setItem($('#mainmenu').val(), jsonData2);
+            console.log(jsonData2);
+            console.log(data2);
+
+
+        })
+
+        if (localStorage.getItem($('#mainmenu').val())) {
+
+            const jsonData2 = localStorage.getItem($('#mainmenu').val());
+            console.log(jsonData2)
+            const data2 = JSON.parse(jsonData2);
+            console.log(data2);
+            $('#mainmenu').val(data2.mainmenu);
+        }
+        $('#OK').on('click', function () {
+            if (localStorage.getItem($('#mainmenu').val())) {
+
+                const jsonData2 = localStorage.getItem($('#mainmenu').val());
+                const data2 = JSON.parse(jsonData2);
+                $('#menu').val(data2.menu);
+                $('#recipe').val(data2.recipe);
+            }
+            else {
+                $('#menu').val("");
+                $('#recipe').val("");
+
+            }
+
+
+        })
+
+    </script>
+
+</body>
+
+</html>
